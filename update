@@ -1,0 +1,7 @@
+cd /home/scherrer/git/conarvirus/
+git pull
+./update_files.sh
+./check.py > check_log
+./generate.py 
+git commit -a -m "update"
+git push
