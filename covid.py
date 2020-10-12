@@ -700,7 +700,7 @@ def generate_graphs():
     for (r, begin),_ in reg:
         for var in  [ ['deaths'], ['confirmed'], ['recovered'] ]:
             if (r,var)!=('United States','recovered'):
-                for sync in [False, True]:
+                for sync in [False]:
                     what_to_plot=[ (2,3), var, ff ]
                     curves(r, what_to_plot=what_to_plot, begin=begin, sm=sm, sync=sync,filename="a", legend=(var=='deaths' and sync==False))
                     what_to_plot=[ (2,3), var, ffb ]
@@ -744,7 +744,7 @@ def generate_markdown():
                 fi = "./fig/"+r2+"_legend"
                 f.write("[![]("+fi+".png"+")]("+fi+".pdf"+")\n\n")
                 fi = "./fig/"+get_filename (r2, True, what_to_plot)+"_a"
-                f.write("["+n2+", curves synchronized (starting when deaths>="+str(death_threshold)+")]("+fi+".pdf) ([table of contents](#top))\n\n")
+                #f.write("["+n2+", curves synchronized (starting when deaths>="+str(death_threshold)+")]("+fi+".pdf) ([table of contents](#top))\n\n")
 
                 what_to_plot=[ (2,3), var, ffb ]
 
@@ -754,7 +754,7 @@ def generate_markdown():
                 fi = "./fig/"+r2+"_legend"
                 f.write("[![]("+fi+".png"+")]("+fi+".pdf"+")\n\n")
                 fi = "./fig/"+get_filename (r2, True, what_to_plot)+"_b"
-                f.write("["+n2+", curves synchronized (starting when deaths>="+str(death_threshold)+")]("+fi+".pdf) ([table of contents](#top))\n\n")
+                #f.write("["+n2+", curves synchronized (starting when deaths>="+str(death_threshold)+")]("+fi+".pdf) ([table of contents](#top))\n\n")
             
 
     f.close()

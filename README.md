@@ -36,15 +36,11 @@
 
 [![](./fig/World_legend.png)](./fig/World_legend.pdf)
 
-[Deaths, curves synchronized (starting when deaths>=3)](./fig/World_sync_d_a.pdf) ([table of contents](#top))
-
 ### Deaths (normalized by population size) <a name="Worldd_rel"> ([table of contents](#top))
 
 [![](./fig/World_d_b.png)](./fig/World_d_b.pdf)
 
 [![](./fig/World_legend.png)](./fig/World_legend.pdf)
-
-[Deaths, curves synchronized (starting when deaths>=3)](./fig/World_sync_d_b.pdf) ([table of contents](#top))
 
 ### Confirmed cases (absolute values) <a name="Worldc_abs"> ([table of contents](#top))
 
@@ -52,15 +48,11 @@
 
 [![](./fig/World_legend.png)](./fig/World_legend.pdf)
 
-[Confirmed cases, curves synchronized (starting when deaths>=3)](./fig/World_sync_c_a.pdf) ([table of contents](#top))
-
 ### Confirmed cases (normalized by population size) <a name="Worldc_rel"> ([table of contents](#top))
 
 [![](./fig/World_c_b.png)](./fig/World_c_b.pdf)
 
 [![](./fig/World_legend.png)](./fig/World_legend.pdf)
-
-[Confirmed cases, curves synchronized (starting when deaths>=3)](./fig/World_sync_c_b.pdf) ([table of contents](#top))
 
 ### Recovered cases (absolute values) <a name="Worldr_abs"> ([table of contents](#top))
 
@@ -68,15 +60,11 @@
 
 [![](./fig/World_legend.png)](./fig/World_legend.pdf)
 
-[Recovered cases, curves synchronized (starting when deaths>=3)](./fig/World_sync_r_a.pdf) ([table of contents](#top))
-
 ### Recovered cases (normalized by population size) <a name="Worldr_rel"> ([table of contents](#top))
 
 [![](./fig/World_r_b.png)](./fig/World_r_b.pdf)
 
 [![](./fig/World_legend.png)](./fig/World_legend.pdf)
-
-[Recovered cases, curves synchronized (starting when deaths>=3)](./fig/World_sync_r_b.pdf) ([table of contents](#top))
 
 
 - - - 
@@ -93,15 +81,11 @@
 
 [![](./fig/Europe_legend.png)](./fig/Europe_legend.pdf)
 
-[Deaths, curves synchronized (starting when deaths>=3)](./fig/Europe_sync_d_a.pdf) ([table of contents](#top))
-
 ### Deaths (normalized by population size) <a name="Europed_rel"> ([table of contents](#top))
 
 [![](./fig/Europe_d_b.png)](./fig/Europe_d_b.pdf)
 
 [![](./fig/Europe_legend.png)](./fig/Europe_legend.pdf)
-
-[Deaths, curves synchronized (starting when deaths>=3)](./fig/Europe_sync_d_b.pdf) ([table of contents](#top))
 
 ### Confirmed cases (absolute values) <a name="Europec_abs"> ([table of contents](#top))
 
@@ -109,15 +93,11 @@
 
 [![](./fig/Europe_legend.png)](./fig/Europe_legend.pdf)
 
-[Confirmed cases, curves synchronized (starting when deaths>=3)](./fig/Europe_sync_c_a.pdf) ([table of contents](#top))
-
 ### Confirmed cases (normalized by population size) <a name="Europec_rel"> ([table of contents](#top))
 
 [![](./fig/Europe_c_b.png)](./fig/Europe_c_b.pdf)
 
 [![](./fig/Europe_legend.png)](./fig/Europe_legend.pdf)
-
-[Confirmed cases, curves synchronized (starting when deaths>=3)](./fig/Europe_sync_c_b.pdf) ([table of contents](#top))
 
 ### Recovered cases (absolute values) <a name="Europer_abs"> ([table of contents](#top))
 
@@ -125,15 +105,11 @@
 
 [![](./fig/Europe_legend.png)](./fig/Europe_legend.pdf)
 
-[Recovered cases, curves synchronized (starting when deaths>=3)](./fig/Europe_sync_r_a.pdf) ([table of contents](#top))
-
 ### Recovered cases (normalized by population size) <a name="Europer_rel"> ([table of contents](#top))
 
 [![](./fig/Europe_r_b.png)](./fig/Europe_r_b.pdf)
 
 [![](./fig/Europe_legend.png)](./fig/Europe_legend.pdf)
-
-[Recovered cases, curves synchronized (starting when deaths>=3)](./fig/Europe_sync_r_b.pdf) ([table of contents](#top))
 
 
 - - - 
@@ -150,15 +126,11 @@
 
 [![](./fig/Asia_legend.png)](./fig/Asia_legend.pdf)
 
-[Deaths, curves synchronized (starting when deaths>=3)](./fig/Asia_sync_d_a.pdf) ([table of contents](#top))
-
 ### Deaths (normalized by population size) <a name="Asiad_rel"> ([table of contents](#top))
 
 [![](./fig/Asia_d_b.png)](./fig/Asia_d_b.pdf)
 
 [![](./fig/Asia_legend.png)](./fig/Asia_legend.pdf)
-
-[Deaths, curves synchronized (starting when deaths>=3)](./fig/Asia_sync_d_b.pdf) ([table of contents](#top))
 
 ### Confirmed cases (absolute values) <a name="Asiac_abs"> ([table of contents](#top))
 
@@ -166,15 +138,11 @@
 
 [![](./fig/Asia_legend.png)](./fig/Asia_legend.pdf)
 
-[Confirmed cases, curves synchronized (starting when deaths>=3)](./fig/Asia_sync_c_a.pdf) ([table of contents](#top))
-
 ### Confirmed cases (normalized by population size) <a name="Asiac_rel"> ([table of contents](#top))
 
 [![](./fig/Asia_c_b.png)](./fig/Asia_c_b.pdf)
 
 [![](./fig/Asia_legend.png)](./fig/Asia_legend.pdf)
-
-[Confirmed cases, curves synchronized (starting when deaths>=3)](./fig/Asia_sync_c_b.pdf) ([table of contents](#top))
 
 ### Recovered cases (absolute values) <a name="Asiar_abs"> ([table of contents](#top))
 
@@ -182,15 +150,11 @@
 
 [![](./fig/Asia_legend.png)](./fig/Asia_legend.pdf)
 
-[Recovered cases, curves synchronized (starting when deaths>=3)](./fig/Asia_sync_r_a.pdf) ([table of contents](#top))
-
 ### Recovered cases (normalized by population size) <a name="Asiar_rel"> ([table of contents](#top))
 
 [![](./fig/Asia_r_b.png)](./fig/Asia_r_b.pdf)
 
 [![](./fig/Asia_legend.png)](./fig/Asia_legend.pdf)
-
-[Recovered cases, curves synchronized (starting when deaths>=3)](./fig/Asia_sync_r_b.pdf) ([table of contents](#top))
 
 
 - - - 
@@ -207,15 +171,11 @@
 
 [![](./fig/North_America_legend.png)](./fig/North_America_legend.pdf)
 
-[Deaths, curves synchronized (starting when deaths>=3)](./fig/North_America_sync_d_a.pdf) ([table of contents](#top))
-
 ### Deaths (normalized by population size) <a name="North_Americad_rel"> ([table of contents](#top))
 
 [![](./fig/North_America_d_b.png)](./fig/North_America_d_b.pdf)
 
 [![](./fig/North_America_legend.png)](./fig/North_America_legend.pdf)
-
-[Deaths, curves synchronized (starting when deaths>=3)](./fig/North_America_sync_d_b.pdf) ([table of contents](#top))
 
 ### Confirmed cases (absolute values) <a name="North_Americac_abs"> ([table of contents](#top))
 
@@ -223,15 +183,11 @@
 
 [![](./fig/North_America_legend.png)](./fig/North_America_legend.pdf)
 
-[Confirmed cases, curves synchronized (starting when deaths>=3)](./fig/North_America_sync_c_a.pdf) ([table of contents](#top))
-
 ### Confirmed cases (normalized by population size) <a name="North_Americac_rel"> ([table of contents](#top))
 
 [![](./fig/North_America_c_b.png)](./fig/North_America_c_b.pdf)
 
 [![](./fig/North_America_legend.png)](./fig/North_America_legend.pdf)
-
-[Confirmed cases, curves synchronized (starting when deaths>=3)](./fig/North_America_sync_c_b.pdf) ([table of contents](#top))
 
 ### Recovered cases (absolute values) <a name="North_Americar_abs"> ([table of contents](#top))
 
@@ -239,15 +195,11 @@
 
 [![](./fig/North_America_legend.png)](./fig/North_America_legend.pdf)
 
-[Recovered cases, curves synchronized (starting when deaths>=3)](./fig/North_America_sync_r_a.pdf) ([table of contents](#top))
-
 ### Recovered cases (normalized by population size) <a name="North_Americar_rel"> ([table of contents](#top))
 
 [![](./fig/North_America_r_b.png)](./fig/North_America_r_b.pdf)
 
 [![](./fig/North_America_legend.png)](./fig/North_America_legend.pdf)
-
-[Recovered cases, curves synchronized (starting when deaths>=3)](./fig/North_America_sync_r_b.pdf) ([table of contents](#top))
 
 
 - - - 
@@ -263,15 +215,11 @@
 
 [![](./fig/United_States_legend.png)](./fig/United_States_legend.pdf)
 
-[Deaths, curves synchronized (starting when deaths>=3)](./fig/United_States_sync_d_a.pdf) ([table of contents](#top))
-
 ### Deaths (normalized by population size) <a name="United_Statesd_rel"> ([table of contents](#top))
 
 [![](./fig/United_States_d_b.png)](./fig/United_States_d_b.pdf)
 
 [![](./fig/United_States_legend.png)](./fig/United_States_legend.pdf)
-
-[Deaths, curves synchronized (starting when deaths>=3)](./fig/United_States_sync_d_b.pdf) ([table of contents](#top))
 
 ### Confirmed cases (absolute values) <a name="United_Statesc_abs"> ([table of contents](#top))
 
@@ -279,15 +227,11 @@
 
 [![](./fig/United_States_legend.png)](./fig/United_States_legend.pdf)
 
-[Confirmed cases, curves synchronized (starting when deaths>=3)](./fig/United_States_sync_c_a.pdf) ([table of contents](#top))
-
 ### Confirmed cases (normalized by population size) <a name="United_Statesc_rel"> ([table of contents](#top))
 
 [![](./fig/United_States_c_b.png)](./fig/United_States_c_b.pdf)
 
 [![](./fig/United_States_legend.png)](./fig/United_States_legend.pdf)
-
-[Confirmed cases, curves synchronized (starting when deaths>=3)](./fig/United_States_sync_c_b.pdf) ([table of contents](#top))
 
 
 - - - 
@@ -304,15 +248,11 @@
 
 [![](./fig/South_America_legend.png)](./fig/South_America_legend.pdf)
 
-[Deaths, curves synchronized (starting when deaths>=3)](./fig/South_America_sync_d_a.pdf) ([table of contents](#top))
-
 ### Deaths (normalized by population size) <a name="South_Americad_rel"> ([table of contents](#top))
 
 [![](./fig/South_America_d_b.png)](./fig/South_America_d_b.pdf)
 
 [![](./fig/South_America_legend.png)](./fig/South_America_legend.pdf)
-
-[Deaths, curves synchronized (starting when deaths>=3)](./fig/South_America_sync_d_b.pdf) ([table of contents](#top))
 
 ### Confirmed cases (absolute values) <a name="South_Americac_abs"> ([table of contents](#top))
 
@@ -320,15 +260,11 @@
 
 [![](./fig/South_America_legend.png)](./fig/South_America_legend.pdf)
 
-[Confirmed cases, curves synchronized (starting when deaths>=3)](./fig/South_America_sync_c_a.pdf) ([table of contents](#top))
-
 ### Confirmed cases (normalized by population size) <a name="South_Americac_rel"> ([table of contents](#top))
 
 [![](./fig/South_America_c_b.png)](./fig/South_America_c_b.pdf)
 
 [![](./fig/South_America_legend.png)](./fig/South_America_legend.pdf)
-
-[Confirmed cases, curves synchronized (starting when deaths>=3)](./fig/South_America_sync_c_b.pdf) ([table of contents](#top))
 
 ### Recovered cases (absolute values) <a name="South_Americar_abs"> ([table of contents](#top))
 
@@ -336,15 +272,11 @@
 
 [![](./fig/South_America_legend.png)](./fig/South_America_legend.pdf)
 
-[Recovered cases, curves synchronized (starting when deaths>=3)](./fig/South_America_sync_r_a.pdf) ([table of contents](#top))
-
 ### Recovered cases (normalized by population size) <a name="South_Americar_rel"> ([table of contents](#top))
 
 [![](./fig/South_America_r_b.png)](./fig/South_America_r_b.pdf)
 
 [![](./fig/South_America_legend.png)](./fig/South_America_legend.pdf)
-
-[Recovered cases, curves synchronized (starting when deaths>=3)](./fig/South_America_sync_r_b.pdf) ([table of contents](#top))
 
 
 - - - 
@@ -361,15 +293,11 @@
 
 [![](./fig/Africa_legend.png)](./fig/Africa_legend.pdf)
 
-[Deaths, curves synchronized (starting when deaths>=3)](./fig/Africa_sync_d_a.pdf) ([table of contents](#top))
-
 ### Deaths (normalized by population size) <a name="Africad_rel"> ([table of contents](#top))
 
 [![](./fig/Africa_d_b.png)](./fig/Africa_d_b.pdf)
 
 [![](./fig/Africa_legend.png)](./fig/Africa_legend.pdf)
-
-[Deaths, curves synchronized (starting when deaths>=3)](./fig/Africa_sync_d_b.pdf) ([table of contents](#top))
 
 ### Confirmed cases (absolute values) <a name="Africac_abs"> ([table of contents](#top))
 
@@ -377,15 +305,11 @@
 
 [![](./fig/Africa_legend.png)](./fig/Africa_legend.pdf)
 
-[Confirmed cases, curves synchronized (starting when deaths>=3)](./fig/Africa_sync_c_a.pdf) ([table of contents](#top))
-
 ### Confirmed cases (normalized by population size) <a name="Africac_rel"> ([table of contents](#top))
 
 [![](./fig/Africa_c_b.png)](./fig/Africa_c_b.pdf)
 
 [![](./fig/Africa_legend.png)](./fig/Africa_legend.pdf)
-
-[Confirmed cases, curves synchronized (starting when deaths>=3)](./fig/Africa_sync_c_b.pdf) ([table of contents](#top))
 
 ### Recovered cases (absolute values) <a name="Africar_abs"> ([table of contents](#top))
 
@@ -393,15 +317,11 @@
 
 [![](./fig/Africa_legend.png)](./fig/Africa_legend.pdf)
 
-[Recovered cases, curves synchronized (starting when deaths>=3)](./fig/Africa_sync_r_a.pdf) ([table of contents](#top))
-
 ### Recovered cases (normalized by population size) <a name="Africar_rel"> ([table of contents](#top))
 
 [![](./fig/Africa_r_b.png)](./fig/Africa_r_b.pdf)
 
 [![](./fig/Africa_legend.png)](./fig/Africa_legend.pdf)
-
-[Recovered cases, curves synchronized (starting when deaths>=3)](./fig/Africa_sync_r_b.pdf) ([table of contents](#top))
 
 
 - - - 
@@ -418,15 +338,11 @@
 
 [![](./fig/Oceania_legend.png)](./fig/Oceania_legend.pdf)
 
-[Deaths, curves synchronized (starting when deaths>=3)](./fig/Oceania_sync_d_a.pdf) ([table of contents](#top))
-
 ### Deaths (normalized by population size) <a name="Oceaniad_rel"> ([table of contents](#top))
 
 [![](./fig/Oceania_d_b.png)](./fig/Oceania_d_b.pdf)
 
 [![](./fig/Oceania_legend.png)](./fig/Oceania_legend.pdf)
-
-[Deaths, curves synchronized (starting when deaths>=3)](./fig/Oceania_sync_d_b.pdf) ([table of contents](#top))
 
 ### Confirmed cases (absolute values) <a name="Oceaniac_abs"> ([table of contents](#top))
 
@@ -434,15 +350,11 @@
 
 [![](./fig/Oceania_legend.png)](./fig/Oceania_legend.pdf)
 
-[Confirmed cases, curves synchronized (starting when deaths>=3)](./fig/Oceania_sync_c_a.pdf) ([table of contents](#top))
-
 ### Confirmed cases (normalized by population size) <a name="Oceaniac_rel"> ([table of contents](#top))
 
 [![](./fig/Oceania_c_b.png)](./fig/Oceania_c_b.pdf)
 
 [![](./fig/Oceania_legend.png)](./fig/Oceania_legend.pdf)
-
-[Confirmed cases, curves synchronized (starting when deaths>=3)](./fig/Oceania_sync_c_b.pdf) ([table of contents](#top))
 
 ### Recovered cases (absolute values) <a name="Oceaniar_abs"> ([table of contents](#top))
 
@@ -450,15 +362,11 @@
 
 [![](./fig/Oceania_legend.png)](./fig/Oceania_legend.pdf)
 
-[Recovered cases, curves synchronized (starting when deaths>=3)](./fig/Oceania_sync_r_a.pdf) ([table of contents](#top))
-
 ### Recovered cases (normalized by population size) <a name="Oceaniar_rel"> ([table of contents](#top))
 
 [![](./fig/Oceania_r_b.png)](./fig/Oceania_r_b.pdf)
 
 [![](./fig/Oceania_legend.png)](./fig/Oceania_legend.pdf)
-
-[Recovered cases, curves synchronized (starting when deaths>=3)](./fig/Oceania_sync_r_b.pdf) ([table of contents](#top))
 
 
 - - - 
@@ -475,15 +383,11 @@
 
 [![](./fig/top15_legend.png)](./fig/top15_legend.pdf)
 
-[Deaths, curves synchronized (starting when deaths>=3)](./fig/top15_sync_d_a.pdf) ([table of contents](#top))
-
 ### Deaths (normalized by population size) <a name="top15d_rel"> ([table of contents](#top))
 
 [![](./fig/top15_d_b.png)](./fig/top15_d_b.pdf)
 
 [![](./fig/top15_legend.png)](./fig/top15_legend.pdf)
-
-[Deaths, curves synchronized (starting when deaths>=3)](./fig/top15_sync_d_b.pdf) ([table of contents](#top))
 
 ### Confirmed cases (absolute values) <a name="top15c_abs"> ([table of contents](#top))
 
@@ -491,15 +395,11 @@
 
 [![](./fig/top15_legend.png)](./fig/top15_legend.pdf)
 
-[Confirmed cases, curves synchronized (starting when deaths>=3)](./fig/top15_sync_c_a.pdf) ([table of contents](#top))
-
 ### Confirmed cases (normalized by population size) <a name="top15c_rel"> ([table of contents](#top))
 
 [![](./fig/top15_c_b.png)](./fig/top15_c_b.pdf)
 
 [![](./fig/top15_legend.png)](./fig/top15_legend.pdf)
-
-[Confirmed cases, curves synchronized (starting when deaths>=3)](./fig/top15_sync_c_b.pdf) ([table of contents](#top))
 
 ### Recovered cases (absolute values) <a name="top15r_abs"> ([table of contents](#top))
 
@@ -507,13 +407,9 @@
 
 [![](./fig/top15_legend.png)](./fig/top15_legend.pdf)
 
-[Recovered cases, curves synchronized (starting when deaths>=3)](./fig/top15_sync_r_a.pdf) ([table of contents](#top))
-
 ### Recovered cases (normalized by population size) <a name="top15r_rel"> ([table of contents](#top))
 
 [![](./fig/top15_r_b.png)](./fig/top15_r_b.pdf)
 
 [![](./fig/top15_legend.png)](./fig/top15_legend.pdf)
-
-[Recovered cases, curves synchronized (starting when deaths>=3)](./fig/top15_sync_r_b.pdf) ([table of contents](#top))
 
