@@ -17,7 +17,7 @@ path = '/home/scherrer/git/conarvirus/'
 
 death_threshold = 3
 
-sm = 20
+sm = 40
 
 dpi = 70
 
@@ -237,6 +237,10 @@ def growth(f):
             gr.append( 100*(f[i+1]/f[i]-1.0) )
     
     return(gr)
+
+
+#def smooth(y, sm, c=3.0):
+#    return  [ np.mean(y[ max(0,t-sm):min(t+sm+1,len(y)) ]) for t in range(len(y)) ]
 
 
 def smooth(y, sm, c=3.0 ):  # local linear smoothing
