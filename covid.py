@@ -33,20 +33,26 @@ reg = [   ( ('World',''), 'World' ),
           ( ('Oceania','4/1/20'), 'Oceania' )  ,
           ( ('top15',''), '15 countries with the most deaths' )    ]
 
-#reg = [   ( ('spec',''), 'Comparison' ) ]
+#reg = [   ( ('Western Europe',''), 'Western Europe' ) ]
+
 
 keys = [ "deaths", "confirmed", "recovered" ] # data to process
 
 regions = {
-    'Asia': ['Heilongjiang(China)', 'Henan(China)', 'Hubei(China)', 'India', 'Indonesia', 'Japan', 'Korea, South', 'Malaysia', 'Philippines', 'Beijing(China)', 'Guangdong(China)', 'Shandong(China)', 'Bangladesh', 'Anhui(China)', 'Chongqing(China)', 'Hainan(China)', 'Hebei(China)', 'Shanghai(China)', 'Thailand', 'Azerbaijan', 'Kazakhstan', 'Singapore', 'Turkey', 'Saudi Arabia', 'United Arab Emirates', 'Iran', 'Iraq', 'Lebanon', 'Pakistan','Afghanistan', 'Egypt', 'Israel','Armenia', 'Kuwait', 'Qatar', 'Oman', 'Kyrgyzstan', 'Uzbekistan', 'Tajikistan', 'Georgia', 'Bahrain', 'Yemen', 'Sri Lanka', 'Nepal', 'Jordan', 'Maldives', 'Syria', 'West Bank and Gaza', 'Burma', 'Taiwan*', 'Burma', 'Hunan(China)', 'Shaanxi(China)', 'Sichuan(China)', 'Tianjin(China)', 'Xinjiang(China)','Brunei', 'Vietnam'],
-    'Europe': ['Albania', 'Austria', 'Belgium', 'Denmark', 'France', 'Germany', 'Greece', 'Hungary', 'Ireland', 'Italy', 'Netherlands', 'Norway', 'Poland', 'Portugal', 'Romania', 'San Marino', 'Spain', 'Sweden', 'Switzerland',  'United Kingdom', 'Czechia', 'Finland', 'Luxembourg', 'Slovenia', 'Iceland', 'Serbia', 'Bosnia and Herzegovina', 'Bulgaria', 'Croatia', 'Cyprus', 'Lithuania', 'Ukraine', 'Russia', 'Andorra', 'North Macedonia', 'Estonia', 'Moldova', 'Belarus', 'Channel Islands(United Kingdom)', 'Kosovo', 'Slovakia', 'Latvia', 'Isle of Man(United Kingdom)', 'Monaco', 'Malta', 'Montenegro'],
-    'North America': ['British Columbia(Canada)', 'Ontario(Canada)', 'Quebec(Canada)', 'Alberta(Canada)', 'Nova Scotia(Canada)', 'Bahamas', 'Guatemala', 'US', 'Bermuda(United Kingdom)', 'Montserrat(United Kingdom)', 'Costa Rica', 'Nicaragua','Saskatchewan(Canada)','Jamaica','Mexico', 'Trinidad and Tobago', 'Barbados', 'Manitoba(Canada)', 'Antigua and Barbuda','Newfoundland and Labrador(Canada)', 'St Martin(France)', 'Aruba(Netherlands)'],
-    'South America': ['Panama', 'Peru', 'Argentina', 'Brazil', 'Ecuador', 'Chile', 'Colombia', 'Honduras', 'Bolivia', 'Dominican Republic', 'Cuba', 'Martinique(France)','Sint Maarten(Netherlands)','Uruguay', 'Venezuela', 'Guadeloupe(France)','El Salvador', 'Paraguay', 'Guyana','French Guiana(France)', 'Suriname'],
+    'China': ['Heilongjiang(China)', 'Henan(China)', 'Hubei(China)', 'Beijing(China)', 'Guangdong(China)', 'Shandong(China)', 'Chongqing(China)', 'Hainan(China)', 'Hebei(China)', 'Shanghai(China)', 'Hunan(China)', 'Shaanxi(China)', 'Sichuan(China)', 'Tianjin(China)', 'Xinjiang(China)', 'Anhui(China)', 'Hong Kong(China)'],
+    'Asia': ['China', 'India', 'Indonesia', 'Japan', 'Korea, South', 'Malaysia', 'Philippines',  'Bangladesh', 'Thailand', 'Azerbaijan', 'Kazakhstan', 'Singapore', 'Turkey', 'Saudi Arabia', 'United Arab Emirates', 'Iran', 'Iraq', 'Lebanon', 'Pakistan','Afghanistan', 'Egypt', 'Israel','Armenia', 'Kuwait', 'Qatar', 'Oman', 'Kyrgyzstan', 'Uzbekistan', 'Tajikistan', 'Georgia', 'Bahrain', 'Yemen', 'Sri Lanka', 'Nepal', 'Jordan', 'Maldives', 'Syria', 'West Bank and Gaza', 'Burma', 'Taiwan*', 'Burma', 'Brunei', 'Vietnam'],
+    'United Kingdom ': ['United Kingdom', 'Channel Islands(United Kingdom)', 'Isle of Man(United Kingdom)', 'Turks and Caicos Islands(United Kingdom)', 'Bermuda(United Kingdom)', 'Montserrat(United Kingdom)'],
+    'Netherlands ': ['Netherlands','Aruba(Netherlands)','Sint Maarten(Netherlands)','Bonaire, Sint Eustatius and Saba(Netherlands)'],
+    'France ': ['France', 'St Martin(France)', 'Martinique(France)','French Guiana(France)','Mayotte(France)','Guadeloupe(France)','Mayotte(France)','Reunion(France)', 'French Polynesia(France)' ],
+    'Europe': ['Albania', 'Austria', 'Belgium', 'Denmark', 'France ', 'Germany', 'Greece', 'Hungary', 'Ireland', 'Italy', 'Netherlands ', 'Norway', 'Poland', 'Portugal', 'Romania', 'San Marino', 'Spain', 'Sweden', 'Switzerland',  'United Kingdom ', 'Czechia', 'Finland', 'Luxembourg', 'Slovenia', 'Iceland', 'Serbia', 'Bosnia and Herzegovina', 'Bulgaria', 'Croatia', 'Cyprus', 'Lithuania', 'Ukraine', 'Russia', 'Andorra', 'North Macedonia', 'Estonia', 'Moldova', 'Belarus', 'Kosovo', 'Slovakia', 'Latvia', 'Monaco', 'Malta', 'Montenegro', 'Liechtenstein'],
+    'Canada': ['British Columbia(Canada)', 'Ontario(Canada)', 'Quebec(Canada)', 'Alberta(Canada)', 'Nova Scotia(Canada)', 'Saskatchewan(Canada)', 'Manitoba(Canada)','Newfoundland and Labrador(Canada)', 'New Brunswick(Canada)'],
+    'North America': [ 'Bahamas', 'Guatemala', 'US', 'Costa Rica', 'Nicaragua','Jamaica','Mexico', 'Trinidad and Tobago', 'Barbados',  'Antigua and Barbuda',  'Belize'],
+    'South America': ['Panama', 'Peru', 'Argentina', 'Brazil', 'Ecuador', 'Chile', 'Colombia', 'Honduras', 'Bolivia', 'Dominican Republic', 'Cuba', 'Uruguay', 'Venezuela', 'El Salvador', 'Paraguay', 'Guyana','Suriname'],
     'Oceania': ['New South Wales(Australia)','Victoria(Australia)', 'New Zealand','Tasmania(Australia)','Western Australia(Australia)', 'Queensland(Australia)','Australian Capital Territory(Australia)','South Australia(Australia)'],
-    'Africa': ['Burkina Faso',  'Congo (Kinshasa)', 'Ghana', 'Morocco','Niger','South Africa', 'Tunisia', 'Algeria', 'Cameroon', 'Nigeria','Mali', 'Kenya', 'Sudan', 'Tanzania', "Cote d'Ivoire", 'Somalia','Liberia','Mauritius','Chad', 'Congo (Brazzaville)', 'Haiti', 'Senegal', 'Guinea', 'Sierra Leone', 'Mayotte(France)', 'Togo', 'Gabon', 'Djibouti', 'Equatorial Guinea', 'Ethiopia','Mauritania', 'South Sudan','Sao Tome and Principe','Guinea-Bissau','Zambia','Madagascar','Libya', 'Central African Republic', 'Benin', 'Angola', 'Malawi', 'Cabo Verde', 'Zimbabwe', 'Mozambique', 'Comoros', 'Eswatini', 'Gambia', 'Rwanda', 'Reunion(France)','Namibia','Uganda','Lesotho'],
+    'Africa': ['Burkina Faso',  'Congo (Kinshasa)', 'Ghana', 'Morocco','Niger','South Africa', 'Tunisia', 'Algeria', 'Cameroon', 'Nigeria','Mali', 'Kenya', 'Sudan', 'Tanzania', "Cote d'Ivoire", 'Somalia','Liberia','Mauritius','Chad', 'Congo (Brazzaville)', 'Haiti', 'Senegal', 'Guinea', 'Sierra Leone',  'Togo', 'Gabon', 'Djibouti', 'Equatorial Guinea', 'Ethiopia','Mauritania', 'South Sudan','Sao Tome and Principe','Guinea-Bissau','Zambia','Madagascar','Libya', 'Central African Republic', 'Benin', 'Angola', 'Malawi', 'Cabo Verde', 'Zimbabwe', 'Mozambique', 'Comoros', 'Eswatini', 'Gambia', 'Rwanda','Namibia','Uganda','Lesotho','Botswana','Papua New Guinea'],
     'World': ['Asia', 'Europe', 'North America', 'South America', 'Africa', 'Oceania' ],
     #
-    'spec': ['France','Belgium','Italy','Spain','Finland','Norway','Sweden','Netherlands'] # comparison of countries with lockdown/masks and without 
+    'Western Europe': ['France ','Belgium', 'Italy','Spain','Finland','Norway','Sweden','Netherlands ','United Kingdom ','Ireland','Portugal','Denmark'] 
 }    
 
 
@@ -127,16 +133,7 @@ def get_data_from_files():
     # 3) get data on population
 
     file = "UID_ISO_FIPS_LookUp_Table.csv"
-    population = {
-        "Asia": 4641E6,
-        "North America": 369E6,
-        "South America": 431E6,
-        "Europe": 747E6,
-        "Oceania": 42E6,
-        "Africa": 1341E6,
-        "World": 7795E6,
-        "United States": 328E6
-    }
+    population=dict()
     with open(file) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
@@ -198,10 +195,11 @@ def filter_by_regions(data, l, bool=True):
     return data2
 
 
-def add_regions(data):
+def add_regions(data,population):
     
     for name in regions:
         lst=regions[name]
+        population[name] = sum( [ population[p] for p in lst ] )
         for k in data:
             if (name,k)!=('United States','recovered'): # special treatment for missing file for US
                 #print(name,k,lst)
@@ -209,8 +207,7 @@ def add_regions(data):
                 for p in lst:
                     if p in data[k]:
                         l.append(data[k][p])
-                data[k][name] = [sum(x) for x in zip(*l)]
-        
+                data[k][name] = [sum(x) for x in zip(*l)] 
     
 #######################################################
 # Data smoothing and differentiation / growth analysis
@@ -540,10 +537,9 @@ def prepare_data(begin="", end=""):
 
     data, days = filter_by_dates(data, days, begin, end)  # get data filtered by filtered by date
 
-    add_regions(data)   # add all regions
+    add_regions(data,population)   # add all regions
     
-    data = filter_by_var_threshold(population, data, 'deaths', death_threshold) # filter by number of deaths
-
+    #data = filter_by_var_threshold(population, data, 'deaths', death_threshold) # filter by number of deaths
     
     # sort the regions/countries
     d = data["deaths"] 
@@ -551,7 +547,6 @@ def prepare_data(begin="", end=""):
     mv = np.array([ max(d[x]) for x in d ])
     bests = list( mv.argsort()[:][::-1] )
     region_list = [ c[i] for i in bests ]
-
     
     # associate line colors and styles to countries
     arg_plot= style_args(region_list)
@@ -564,7 +559,7 @@ def prepare_graph(data, days, category, sync):
     if category=="top15":  # top15
 
         title = "Covid-19 evolution, 15 most affected countries"
-        data2 = filter_by_regions(data, ['World']+regions['World']+['United States']+regions['United States'], bool=False ) # remove regions
+        data2 = filter_by_regions(data, ['World']+regions['World']+['United States']+regions['United States']+['Western Europe'], bool=False ) # remove regions
         d = data2["deaths"]
         c = [x for x in d]
         mv = np.array([ max(d[x]) for x in d ])
@@ -577,8 +572,16 @@ def prepare_graph(data, days, category, sync):
                     
         title="Covid-19 evolution, "+category
 
-        region_list = [ i for i in regions[category]+[category] ]
-        focus=[category]
+        d = data["deaths"]
+        c = [ i for i in regions[category] ] ###+[category] ]
+        #print(c)
+        mv = np.array([ max(d[x]) for x in c ])
+        bests = list( mv.argsort()[-min(15,len(c)):][::-1] )  # just keep at most 15
+        
+        region_list = [ c[i] for i in bests ]
+        #print(region_list)
+        focus=[] ###[category]
+        
             
     elif type(category) is list: # it is a list of countries
         
