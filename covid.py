@@ -33,7 +33,7 @@ reg = [   ( ('World',''), 'World' ),
           ( ('Oceania','4/1/20'), 'Oceania' )  ,
           ( ('top15',''), '15 countries with the most deaths' )    ]
 
-#reg = [   ( ('Western Europe',''), 'Western Europe' ) ]
+#reg = [    ( ('top15',''), '15 countries with the most deaths' )    ]
 
 
 keys = [ "deaths", "confirmed", "recovered" ] # data to process
@@ -559,7 +559,7 @@ def prepare_graph(data, days, category, sync):
     if category=="top15":  # top15
 
         title = "Covid-19 evolution, 15 most affected countries"
-        data2 = filter_by_regions(data, ['World']+regions['World']+['United States']+regions['United States']+['Western Europe'], bool=False ) # remove regions
+        data2 = filter_by_regions(data, ['World']+regions['World']+['United States']+regions['United States']+['Western Europe','France','United Kingdom'], bool=False ) # remove regions
         d = data2["deaths"]
         c = [x for x in d]
         mv = np.array([ max(d[x]) for x in d ])
