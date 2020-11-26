@@ -402,9 +402,9 @@ def plot(population, region_list, what_to_plot, focus, fcts, arg_plot, days, siz
             
             if nl==6: # gr
 
-                yy = (0, min(13, yy[1])) # don't go too high
+                yy = (0, min(5, yy[1])) # don't go too high
                 
-                for j in [6,7,8,9,10,15,30]:
+                for j in [6,7,8,9,10,15,20,25,30]:
                     z = 100*(pow(2.0, 1.0/j)-1)
                     if z>=yy[0] and z<=yy[1]:
                         plt.plot([x1, x3], [z,z], "-",color='lightgrey', lw=1, zorder=0)
