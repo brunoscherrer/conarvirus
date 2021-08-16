@@ -1,0 +1,786 @@
+#!/usr/bin/python3
+
+
+import matplotlib as mpl
+mpl.use('Agg')
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+import matplotlib.patheffects as path_effects
+import colorsys
+from datetime import date,timedelta,datetime
+import numpy as np
+import csv
+import os
+
+
+path = '/home/scherrer/git/conarvirus/'
+
+death_threshold = 3
+
+sm = 40
+
+dpi = 70
+
+# regions to plot
+
+reg = [   ( ('World',''), 'World' ),
+          ( ('Europe','2/25/20'), 'Europe'),
+          ( ('Asia',''), 'Asia'),
+          ( ('North America','3/4/20'), 'North America'),
+          ( ('United States','3/4/20'), 'United States'),
+          ( ('South America','3/18/20'), 'South America'),
+          ( ('Africa','3/9/20'), 'Africa' ),
+          ( ('Oceania','4/1/20'), 'Oceania' )  ,
+          ( ('top15',''), '15 countries with the most deaths' )    ]
+
+reg = [    ( ('Western Europe',''), 'West_europe' )    ]
+
+
+keys = [ "deaths", "confirmed", "recovered" ] # data to process
+
+regions = {
+    'China': ['Heilongjiang(China)', 'Henan(China)', 'Hubei(China)', 'Beijing(China)', 'Guangdong(China)', 'Shandong(China)', 'Chongqing(China)', 'Hainan(China)', 'Hebei(China)', 'Shanghai(China)', 'Hunan(China)', 'Shaanxi(China)', 'Sichuan(China)', 'Tianjin(China)', 'Xinjiang(China)', 'Anhui(China)', 'Hong Kong(China)'],
+    'Asia': ['China', 'India', 'Indonesia', 'Japan', 'Korea, South', 'Malaysia', 'Philippines',  'Bangladesh', 'Thailand', 'Azerbaijan', 'Kazakhstan', 'Singapore', 'Turkey', 'Saudi Arabia', 'United Arab Emirates', 'Iran', 'Iraq', 'Lebanon', 'Pakistan','Afghanistan', 'Egypt', 'Israel','Armenia', 'Kuwait', 'Qatar', 'Oman', 'Kyrgyzstan', 'Uzbekistan', 'Tajikistan', 'Georgia', 'Bahrain', 'Yemen', 'Sri Lanka', 'Nepal', 'Jordan', 'Maldives', 'Syria', 'West Bank and Gaza', 'Burma', 'Taiwan*', 'Burma', 'Brunei', 'Vietnam'],
+    'United Kingdom ': ['United Kingdom', 'Channel Islands(United Kingdom)', 'Isle of Man(United Kingdom)', 'Turks and Caicos Islands(United Kingdom)', 'Bermuda(United Kingdom)', 'Montserrat(United Kingdom)'],
+    'Netherlands ': ['Netherlands','Aruba(Netherlands)','Sint Maarten(Netherlands)','Bonaire, Sint Eustatius and Saba(Netherlands)'],
+    'France ': ['France', 'St Martin(France)', 'Martinique(France)','French Guiana(France)','Mayotte(France)','Guadeloupe(France)','Mayotte(France)','Reunion(France)', 'French Polynesia(France)' ],
+    'Europe': ['Albania', 'Austria', 'Belgium', 'Denmark', 'France ', 'Germany', 'Greece', 'Hungary', 'Ireland', 'Italy', 'Netherlands ', 'Norway', 'Poland', 'Portugal', 'Romania', 'San Marino', 'Spain', 'Sweden', 'Switzerland',  'United Kingdom ', 'Czechia', 'Finland', 'Luxembourg', 'Slovenia', 'Iceland', 'Serbia', 'Bosnia and Herzegovina', 'Bulgaria', 'Croatia', 'Cyprus', 'Lithuania', 'Ukraine', 'Russia', 'Andorra', 'North Macedonia', 'Estonia', 'Moldova', 'Belarus', 'Kosovo', 'Slovakia', 'Latvia', 'Monaco', 'Malta', 'Montenegro', 'Liechtenstein'],
+    'Canada': ['British Columbia(Canada)', 'Ontario(Canada)', 'Quebec(Canada)', 'Alberta(Canada)', 'Nova Scotia(Canada)', 'Saskatchewan(Canada)', 'Manitoba(Canada)','Newfoundland and Labrador(Canada)', 'New Brunswick(Canada)'],
+    'North America': [ 'Bahamas', 'Guatemala', 'US', 'Costa Rica', 'Nicaragua','Jamaica','Mexico', 'Trinidad and Tobago', 'Barbados',  'Antigua and Barbuda',  'Belize'],
+    'South America': ['Panama', 'Peru', 'Argentina', 'Brazil', 'Ecuador', 'Chile', 'Colombia', 'Honduras', 'Bolivia', 'Dominican Republic', 'Cuba', 'Uruguay', 'Venezuela', 'El Salvador', 'Paraguay', 'Guyana','Suriname'],
+    'Oceania': ['New South Wales(Australia)','Victoria(Australia)', 'New Zealand','Tasmania(Australia)','Western Australia(Australia)', 'Queensland(Australia)','Australian Capital Territory(Australia)','South Australia(Australia)'],
+    'Africa': ['Burkina Faso',  'Congo (Kinshasa)', 'Ghana', 'Morocco','Niger','South Africa', 'Tunisia', 'Algeria', 'Cameroon', 'Nigeria','Mali', 'Kenya', 'Sudan', 'Tanzania', "Cote d'Ivoire", 'Somalia','Liberia','Mauritius','Chad', 'Congo (Brazzaville)', 'Haiti', 'Senegal', 'Guinea', 'Sierra Leone',  'Togo', 'Gabon', 'Djibouti', 'Equatorial Guinea', 'Ethiopia','Mauritania', 'South Sudan','Sao Tome and Principe','Guinea-Bissau','Zambia','Madagascar','Libya', 'Central African Republic', 'Benin', 'Angola', 'Malawi', 'Cabo Verde', 'Zimbabwe', 'Mozambique', 'Comoros', 'Eswatini', 'Gambia', 'Rwanda','Namibia','Uganda','Lesotho','Botswana','Papua New Guinea'],
+    'World': ['Asia', 'Europe', 'North America', 'South America', 'Africa', 'Oceania' ],
+    #
+    'Western Europe': ['France ','Spain','Netherlands ','Sweden'] 
+}    
+
+
+#############################
+# Loading and filtering data
+
+def reformat_location(location):
+
+    l1,l2=location.split("/")
+    if l2=="":# or l1==l2:
+        return l1
+    elif l1=="US":
+        return l2
+    else:
+        return l2+"("+l1+")"
+
+
+
+def get_data_from_files():
+
+    # 1) get data for all countries in the world
+    
+    files = [ "time_series_covid19_deaths_global.csv", "time_series_covid19_confirmed_global.csv", "time_series_covid19_recovered_global.csv" ] # files where to fetch data
+
+    data = dict()
+
+    i=0
+    for key in keys:
+        data[key]=dict()
+        with open(files[i]) as csv_file:
+            csv_reader = csv.reader(csv_file, delimiter=',')
+            line_count = 0
+            for row in csv_reader:
+                if line_count == 0:
+                    days = row[4:]
+                else:
+                    location = row[1]+"/"+row[0]
+                    p = reformat_location(location)
+                    if p not in ["Diamond Princess", "Diamond Princess(Boat)"]:
+                        data2 = [ int(float(row[j])) for j in range(4,len(row))]
+                        # store data
+                        data[key][p] = data2                            
+                line_count += 1
+        i += 1
+        
+    # 2) get detailed data for US
+
+    regions['United States'] = []
+    
+    files = [ "time_series_covid19_deaths_US.csv", "time_series_covid19_confirmed_US.csv"]#, "time_series_covid19_recovered_US.csv" ] # files where to fetch data
+
+    i=0
+    for key in keys[0:2]:
+        #del data[key]['United States']
+        with open(files[i]) as csv_file:
+            csv_reader = csv.reader(csv_file, delimiter=',')
+            line_count = 0
+            for row in csv_reader:
+                if line_count != 0:
+                    p = row[6]
+                    data2 = [ int(float(row[j])) for j in range(12,len(row))]
+                    # store data
+                    if p not in ["Diamond Princess", "Grand Princess", "Diamond Princess(Boat)"]:
+                        if p in data[key]:
+                            data[key][p] = [ data[key][p][x] + data2[x] for x in range(len(data2)) ]
+                        else:
+                            if p not in regions["United States"]:
+                                regions["United States"].append(p)
+                            data[key][p] = data2
+                line_count += 1
+        i += 1
+        
+    # dummy value for recovered (currently no file)
+    for p in regions['United States']:
+        data['recovered'][p] = [0]*len(days)
+
+
+    # 3) get data on population
+
+    file = "UID_ISO_FIPS_LookUp_Table.csv"
+    population=dict()
+    with open(file) as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=',')
+        line_count = 0
+        for row in csv_reader:
+            if line_count != 0:
+                if row[5]=='':
+                    location = row[7]+"/"+row[6]
+                    p = reformat_location(location)
+                    if row[11]!='':
+                        population[p] = int(row[11])
+            line_count += 1    
+    
+    return(data, days, population)
+
+
+def filter_by_dates(data, days, begin, end):
+    
+    data2 = dict()
+    a = days.index(begin)
+    b = days.index(end)
+    for k in data:
+        data2[k] = dict()
+        for p in data[k]:
+            data2[k][p] = data[k][p][a:b+1]
+    
+    return(data2, days[a:b+1])
+
+
+def filter_by_var_threshold(population, data, var, threshold=death_threshold):
+
+    data2 = dict()
+    for k in data:
+        data2[k] = dict()
+
+    for p in data[var]:
+        if p in population:
+            d = data[var][p]
+            if max(d) >= threshold:
+                j = list(map(lambda i: float(i) >= threshold, d)).index(True)
+                if j<len(d):
+                    for k in data:
+                        if p in data[k]:
+                            d2 = data[k][p][j:]
+                            data2[k][p] = d2
+
+    
+    return(data2)
+
+
+def filter_by_regions(data, l, bool=True):
+
+    data2 = dict()
+    for k in data:
+        data2[k] = dict()
+        for p in data[k]:
+            if (p in l)==bool:
+                data2[k][p] = data[k][p]
+
+    return data2
+
+
+def add_regions(data,population):
+    
+    for name in regions:
+        lst=regions[name]
+        population[name] = sum( [ population[p] for p in lst ] )
+        for k in data:
+            if (name,k)!=('United States','recovered'): # special treatment for missing file for US
+                #print(name,k,lst)
+                l = []
+                for p in lst:
+                    if p in data[k]:
+                        l.append(data[k][p])
+                data[k][name] = [sum(x) for x in zip(*l)] 
+    
+#######################################################
+# Data smoothing and differentiation / growth analysis
+
+def diff(f):  # discrete differentiation and growth rate
+
+    return ( [ f[i+1]-f[i]  for i in range(len(f)-1) ] )
+
+def integ(f,a):
+
+    g = [a]
+    for i in range(len(f)):
+        g.append(f[i]+g[-1])
+    return(g)
+
+
+def growth(f):
+
+    gr = [ ]
+    for i in range(len(f)-1):
+        if f[i] < 1:
+            gr.append( np.nan )
+        else:
+            gr.append( 100*(f[i+1]/f[i]-1.0) )
+    
+    return(gr)
+
+
+#def smooth(y, sm, c=3.0):
+#    return  [ np.mean(y[ max(0,t-sm):min(t+sm+1,len(y)) ]) for t in range(len(y)) ]
+
+
+def smooth(y, sm, c=3.0 ):  # local linear smoothing
+
+    if len(y)<3:
+        return(y)
+    
+    y2 = y.copy()
+    for i in range(sm):
+        y2 = [ y2[0] ] + [ (y2[j-1] + (c-2)*y2[j] + y2[j+1])/c for j in range(1,len(y2)-1) ] + [ y2[-1] ]
+    return(y2)
+
+
+
+def log_smooth(y, sm):
+    return( list( map(
+        lambda x:np.exp(x)-1,
+        smooth( list(map(lambda x:np.log(1+x), y) ), sm )
+    ) ) )   # smoothing of the log(x)-transformed function
+
+
+def compute_fcts(data, sm):
+    
+    dg, grg, gs, dgs, grgs, grdgs, d2gs = dict(), dict(), dict(), dict(), dict(), dict(), dict()
+    for key in keys:
+
+        # calcul des dérivées (avec régularisation)
+        dg[key], grg[key], gs[key], dgs[key], grgs[key], grdgs[key], d2gs[key] = dict(), dict(), dict(), dict(), dict(), dict(), dict()
+        
+        for f in data[key]:
+            
+            dg[key][f] = diff( data[key][f] )
+                        
+            gs[key][f] =  log_smooth( data[key][f], sm )
+            
+            dgs[key][f] = diff( gs[key][f] )
+
+            d2gs[key][f] = smooth( diff( dgs[key][f] ), 5)
+            
+            grg[key][f] = growth( data[key][f] )
+            grgs[key][f] = smooth( growth( gs[key][f] ), 5)
+            
+            grdgs[key][f] = smooth( growth( dgs[key][f] ), 5)
+                
+    return [data, dg, grg, gs, dgs, grgs, grdgs, d2gs ]
+
+
+#########################
+# Functions to plot data
+
+
+def style_args(region_list):   # define style parameters for plot and text for each region/country
+
+    colors = [ colorsys.hsv_to_rgb( x, 1.0, 0.8 ) for x in np.arange(0.0,1.0, 1.0/len(region_list) ) ]
+    lc = len(colors)
+    linestyles = [ "-" ]# "--", ":", "-." ]
+
+    # sort countries by max number of deaths
+    
+    arg_plot = dict()
+    k = 0
+
+    for phase in [0,1]: # phase 0: regions, phase 1: sub-regions, countries
+        for f in region_list:
+            if (phase==0 and f in regions) or (phase==1 and f not in regions):
+                arg_plot[f] = dict()
+                arg_plot[f]["color"] = colors[k%lc]
+                arg_plot[f]["linestyle"] = linestyles[int(k/lc)]
+                k+=1
+                
+    return arg_plot
+
+
+def get_xr_color_lw(f, sync, lmax, arg_plot, focus, days): # xrange, color and size of plot
+    if sync:
+        xr = range(0, lmax) 
+    else:
+        xr = [ (datetime.strptime(days[-1],"%m/%d/%y")+timedelta(i)) for i in range(-lmax+1, 1) ]
+    color = arg_plot[f]["color"]  # color and width of graph/text
+    if f in focus:
+        lw=2
+    else:
+        lw=1
+    return xr, color, lw
+
+
+def plot(population, region_list, what_to_plot, focus, fcts, arg_plot, days, size=5, sync=False):
+    
+    kk=6
+    
+    [ g, dg, grg, gs, dgs, grgs, grdgs, d2gs ] = fcts
+
+    geom, lkeys, lgraphs = what_to_plot
+    lk, lg = len(lkeys), len(lgraphs)
+
+    fig = plt.figure(figsize=(size*1.33*geom[1], size*geom[0]))
+    
+    for i in range(lk):
+        
+        key = lkeys[i]
+        nkey = keys.index(key)
+        
+        for l in range(lg):
+
+            nl = lgraphs[l]
+            norm = ".\\frac{10^6}{population}"
+            dg2 = "\\left(\\frac{\\Delta "+key+"}{\\Delta t}\\right)"
+            dg2n = "\\left(\\frac{\\Delta "+key+"}{ \\Delta t}"+norm+"\\right)"
+            dg3 = "\\left(\\frac{\\Delta^2 "+key+"}{(\\Delta t)^2}"+norm+"\\right)"
+            dg4 = "\\left(\\frac{\\Delta "+key+"}{"+key+"}\\right)"
+            dg5 = "\\left(\\frac{\\Delta^2 "+key+"}{(\\Delta t)^2}\\right)"
+            forpop = " for $10^6$ people"
+            (title, fc, log, normalize)= [ ("Total number of "+key, (gs,g), False, False),                            #0
+                                           (key+" by day $"+dg2+"$", (dgs,dg), False, False),                         #1
+                                           ("Total number of "+key, (gs,g), True, False),                             #2
+                                           (key+" by day $"+dg2+"$", (dgs,dg), True, False),                          #3
+                                           ("Total number of "+key+forpop, (gs,g), False, True),                      #4
+                                           (key+" by day "+forpop+" $"+dg2n+"$", (dgs,dg), False, True),              #5
+                                           ("Growth rate (%) of "+key+" $"+dg4+"$" , (grgs,grg), False, False),       #6
+                                           ("Acceleration of "+key+forpop+" $"+dg3+"$", (d2gs,d2gs), False, True),    #7
+                                           ("Total number of "+key+forpop, (gs,g), True, True),                       #8
+                                           (key+" by day "+forpop+" $"+dg2n+"$", (dgs,dg), True, True),               #9
+                                           ("Acceleration of "+key+" $"+dg5+"$", (d2gs,d2gs), False, False),          #10
+                                                                         
+            ][ nl ]
+
+            if log:
+                title += " (log scale)"
+            
+            ax = plt.subplot( geom[0], geom[1], lk*i + l+1 )
+            plt.title(title, fontsize=int(size*2.7))
+
+            max_len = get_max_len(fc[0][key])
+            
+            # plot curves
+            for f in fc[0][key]:
+                
+                myf = np.array( fc[0][key][f] )
+                if normalize:
+                    myf = pow(10.0,kk)*myf/population[f]
+                
+                xr, color, lw = get_xr_color_lw( f, sync, len(myf), arg_plot, focus, days )
+                
+                plt.plot( xr, myf, lw=lw, **arg_plot[f], path_effects=[path_effects.Stroke(linewidth= lw + 1, foreground='white'), path_effects.Normal()], label=f )
+
+            # get the graph y range
+            yy = ax.get_ylim() 
+                
+            if sync:
+                x1,x2 = 0, max_len
+            else:
+                ax.xaxis.set_major_formatter(mdates.DateFormatter('%d/%m'))
+                xr, _, _ = get_xr_color_lw( f, sync, max_len, arg_plot, focus, days )
+                x1,x2 = xr[0], xr[-1] 
+            x3 = x2+(x2-x1)/5.0 # room for country name
+
+            
+            if nl==7: # acceleration
+
+                plt.plot([x1, x3], [0, 0], "-", color='black', lw=1, zorder=2)
+                #plt.yscale('symlog')
+            
+            if nl==6: # gr
+
+                yy = (0, min(5, yy[1])) # don't go too high
+                
+                for j in [6,7,8,9,10,15,20,25,30]:
+                    z = 100*(pow(2.0, 1.0/j)-1)
+                    if z>=yy[0] and z<=yy[1]:
+                        plt.plot([x1, x3], [z,z], "-",color='lightgrey', lw=1, zorder=0)
+                        plt.text(x1,z,"doubles every %d days"%j, fontsize=8, color="grey", zorder=0)
+                    z = 100*(pow(0.5, 1.0/j)-1)
+                    if z>=yy[0] and z<=yy[1]:
+                        plt.plot([x1, x3], [z,z], "-",color='lightgrey', lw=1, zorder=0)
+                        plt.text(x1,z,"divided by 2 every %d days"%j, fontsize=8, color="grey", zorder=0)
+
+                plt.plot([x1, x3], [0, 0], "-", color='black', lw=1, zorder=2)
+                
+            if log:
+
+                plt.yscale('log')
+                yy = ax.get_ylim()
+                yy = ( max(yy[1]/5000, yy[0]), yy[1] )
+
+            # set the grids
+            if nl==6: # gr
+                plt.grid(True, which='both', axis='x')
+            else:
+                plt.grid(True, which="both")
+            
+            # add text for regions
+            for f in fc[0][key]:
+                
+                myf = np.array( fc[0][key][f] )
+                if normalize:
+                    myf = pow(10.0,kk)*myf/population[f]
+                    
+                xr, color, lw = get_xr_color_lw( f, sync, len(myf), arg_plot, focus, days )
+
+                if len(myf)>0:
+                        
+                    if yy[0] <= myf[-1] <= yy[1]:
+                        if f in focus:
+                            arg_text={"bbox": {'facecolor':'white', 'alpha':0.5, 'boxstyle':"round", 'edgecolor':color},
+                                      "fontsize": 9,
+                                      "color":color
+                            }
+                        else:
+                            arg_text={"fontsize": 9,
+                                      "color":color
+                            }        
+                        txt = plt.text( xr[-1] , myf[-1], f, **arg_text )
+                        txt.set_path_effects([path_effects.Stroke(linewidth=2, foreground='white'), path_effects.Normal()])
+
+            # plot real data
+            if  nl in [0, 1, 2, 3, 4, 5, 8, 9]:
+
+                for f in fc[1][key]:
+                    
+                    myf = np.array(fc[1][key][f])
+                    if normalize:
+                        myf = pow(10.0,kk)*myf/population[f]
+                    
+                    xr, color, lw = get_xr_color_lw( f, sync, len(myf), arg_plot, focus, days )
+                    
+                    plt.plot( xr, myf, "o", markersize=lw/1.5, color=color, zorder=1 )
+
+            # adjust the graph ranges
+            plt.ylim(yy[0],yy[1])
+            plt.xlim(x1,x3) # room for country name
+
+    
+    # final settings                      
+    plt.tight_layout()
+    plt.subplots_adjust(top=0.93)
+    
+    return(fig, ax.get_legend_handles_labels())
+
+
+#########################################
+#### Main function
+
+
+# Common part
+
+def check_for_countries(threshold=death_threshold):
+
+    print("Check for countries with at least",death_threshold,"deaths")
+    
+    data, days, population = get_data_from_files()
+    
+    data = filter_by_var_threshold(population, data, "deaths", threshold)
+    
+    l=[]
+    for p in data["deaths"]:
+        flag=False
+        for r in regions:
+            if p in regions[r] or p=="United States":
+                flag=True
+                break
+
+        if not flag:
+            l.append(p)
+
+    if l!=[]:
+        print("\nNew countries to add to continents:")
+        for x in l:
+            print("'"+x+"'")
+        exit(1)
+
+
+    # print("Check for population information")
+
+    # countries = dict()
+    # with open("pop.csv") as csv_file:
+    #     csv_reader = csv.reader(csv_file, delimiter=',')
+    #     for row in csv_reader:
+    #         countries[row[1]]=(row[0],int(row[2]))
+
+    # data = filter_by_regions(data, ['World']+regions['World']+regions['US'], bool=False ) # remove regions        
+
+    # for p in data['deaths']:
+    #     if p not in countries:
+            
+    #             print(p)
+        
+    # exit(1)
+    
+def prepare_data(begin="", end=""):
+    
+    data, days, population = get_data_from_files()  # get data for all countries
+    
+    if begin=="":
+        begin = days[0]
+    if end=="":
+        end = days[-1]
+
+    data, days = filter_by_dates(data, days, begin, end)  # get data filtered by filtered by date
+
+    add_regions(data,population)   # add all regions
+    
+    #data = filter_by_var_threshold(population, data, 'deaths', death_threshold) # filter by number of deaths
+    
+    # sort the regions/countries
+    d = data["deaths"] 
+    c = [x for x in d]
+    mv = np.array([ max(d[x]) for x in d ])
+    bests = list( mv.argsort()[:][::-1] )
+    region_list = [ c[i] for i in bests ]
+    
+    # associate line colors and styles to countries
+    arg_plot= style_args(region_list)
+    
+    return data, days, arg_plot, population
+
+    
+def prepare_graph(data, days, category, sync):
+    
+    if category=="top15":  # top15
+
+        title = "Covid-19 evolution, 15 most affected countries"
+        data2 = filter_by_regions(data, ['World']+regions['World']+['United States']+regions['United States']+['Western Europe','France','United Kingdom'], bool=False ) # remove regions
+        d = data2["deaths"]
+        c = [x for x in d]
+        mv = np.array([ max(d[x]) for x in d ])
+        bests = list( mv.argsort()[-15:][::-1] )
+        
+        region_list = [ c[i] for i in bests ]
+        focus = []
+        
+    elif type(category) is str and category in regions:    
+                    
+        title="Covid-19 evolution, "+category
+
+        d = data["deaths"]
+        c = [ i for i in regions[category] ] ###+[category] ]
+        #print(c)
+        mv = np.array([ max(d[x]) for x in c ])
+        bests = list( mv.argsort()[-min(15,len(c)):][::-1] )  # just keep at most 15
+        
+        region_list = [ c[i] for i in bests ]
+        #print(region_list)
+        focus=[] ###[category]
+        
+            
+    elif type(category) is list: # it is a list of countries
+        
+        title="Covid-19 evolution"
+        region_list = category
+        focus=[]
+
+    else:
+        print(category,"is not known")
+        exit(1)
+
+    data2 = filter_by_regions(data, region_list)
+    
+    if sync:
+        title+=" (data from JHU CSSE "+str(days[-1])+", day 0=$1^{st}$ day with $deaths \\geq "+str(death_threshold)+"$)"
+    else:
+        title+=" (data from JHU CSSE, "+str(days[-1])+")"      
+    
+    return data2, region_list, focus, title
+
+
+def get_max_len(fs): # for a dictionary of functions
+    return max( [ len(fs[x]) for x in fs ] )
+
+
+def get_filename(category,sync, what_to_plot):
+
+    if type(category) is list:
+        c=""
+        for x in category:
+            c+=x
+        category=c
+    filename=category.replace(' ','_') + ["","_sync"][int(sync)]+"_"
+    for i in what_to_plot[1]:
+        filename += i[0]
+        
+    return(filename)
+
+
+def curves(category, what_to_plot, filename="", begin="", end="", sm=0, size=6, sync=False, local_colors=True, legend=False):
+    
+    filename=get_filename(category, sync, what_to_plot)+"_"+filename
+    
+    print(filename)
+        
+    data, days, arg_plot, popu = prepare_data(begin=begin, end=end)
+    
+    data2, region_list, focus, title = prepare_graph(data, days, category, sync)
+    
+    fcts = compute_fcts(data2, sm)
+
+    if local_colors:
+        # sort the regions/countries
+        d = data2["deaths"] 
+        c = [x for x in d]
+        mv = np.array([ max(d[x]) for x in d ])
+        bests = list( mv.argsort()[:][::-1] )
+        rl = [ c[i] for i in bests ]
+        arg_plot= style_args(rl)
+    
+    fig, legend  = plot(popu, region_list, what_to_plot, focus, fcts, arg_plot, days, size=size, sync=sync)
+    plt.suptitle(title, fontsize=16)
+    plt.savefig(path+"fig/"+filename+".png", dpi=dpi)
+    plt.savefig(path+"fig/"+filename+".pdf")
+
+    if legend:
+        # add legend
+        fig2=plt.figure()
+        plt.axis('off')
+        legend = plt.legend(*legend, loc=3, ncol=8, frameon=False)
+        fig2  = legend.figure
+        fig2.canvas.draw()
+        bbox  = legend.get_window_extent().transformed(fig2.dpi_scale_trans.inverted())
+        fig2.savefig(path+"fig/"+category.replace(' ','_')+"_legend.png", bbox_inches=bbox)
+        fig2.savefig(path+"fig/"+category.replace(' ','_')+"_legend.pdf", bbox_inches=bbox)
+        plt.close('all')
+    
+    
+    
+def animation(category, what_to_plot, begin="", end="", sm=0, size=5, sync=False):
+    
+    filename=get_filename(category, sync, what_to_plot)+"_evol"
+    
+    print(filename)
+
+    data, days, arg_plot, popu = prepare_data(begin=begin, end=end)
+    data2, region_list, focus, title = prepare_graph(data, days, category, sync)
+    fcts = compute_fcts(data, sm)
+
+    max_len = max( [ get_max_len( fcts[i][key] )  for i in range(len(fcts)) for key in fcts[i]  ] )
+    for t in range(2,max_len):
+        
+        print("t=",t,"day=",days[t])
+
+        # Crop all data 
+        fcts2 = [ dict() for j in range(len(fcts)) ]
+        for j in range(len(fcts)):
+            for key in keys:
+                fcts2[j][key] = dict()
+                for f in data2[key]:
+                    z = max( 0, t - max_len + len(fcts[j][key][f]) + 1 )
+                    fcts2[j][key][f] = fcts[j][key][f][0:z]
+                    
+        fig = plot(popu, region_list, what_to_plot, focus, fcts2, arg_plot, days[0:t], size=size, sync=sync)
+        plt.suptitle(title, fontsize = 16)
+        plt.savefig(path+"tmp/"+filename+"_%02d.png"%t, dpi=dpi)
+        plt.close('all')
+
+    anim_command = "convert -verbose -loop 0 "
+    lmax_len = list( range( 3,max_len-1 ) ) 
+    src = " ".join([ "tmp/"+filename+"_%02d.png"%i for i in lmax_len ])
+    print("Generate animations : "+src)
+    os.system( anim_command+src+" -delay 30 tmp/"+filename+"_%02d.png"%(max_len-1)+" ./gif/"+filename+".gif" )
+
+    os.system( "rm ./tmp/*" )
+
+
+ff = [0, 2, 6, 1, 3, 10]#[ 0, 1, 2, 3, 6, 10 ]  
+ffb = [4, 8, 6, 5, 9, 7]#[ 4, 5, 8, 9, 6, 7]
+ff2b = [4, 8, 6, 5, 9, 7]#[4, 5, 8, 9, 6, 7]
+    
+def generate_graphs():
+    for (r, begin),_ in reg:
+        for var in  [ ['deaths'], ['confirmed'], ['recovered'] ]:
+            if (r,var)!=('United States','recovered'):
+                for sync in [False]:
+                    what_to_plot=[ (2,3), var, ff ]
+                    curves(r, what_to_plot=what_to_plot, begin=begin, sm=sm, sync=sync,filename="a", legend=(var=='deaths' and sync==False))
+                    what_to_plot=[ (2,3), var, ffb ]
+                    curves(r, what_to_plot=what_to_plot, begin=begin, sm=sm, sync=sync,filename="b", legend=(var=='deaths' and sync==False))
+
+
+def generate_markdown():
+
+    f = open(path+"README2.md",'w')
+    
+    f.write("**A page specific to France is [here](../santepubliquefrance/README2.html).** \n\n# Graphical representations of the evolution of COVID-19 <a name=\"top\">\n\n This page provides graphical representations of [daily-updated data provided by JHU CSSE](https://github.com/CSSEGISandData/COVID-19). It is in particular inspired by this [New York Times article](https://www.nytimes.com/interactive/2020/03/21/upshot/coronavirus-deaths-by-country.html). See also [the site at ourworldingdata.com](https://ourworldindata.org/coronavirus) with many data analyses. \n\n We consider the evolution of the number of **deaths**, **confirmed cases** and **recovered cases**. \n\n For several groups of countries/regions, we provide graphs of the evolution of the *cumulative value* and the *per-day value* in linear and log scales. We also present evolution curves that are independent of the population size such as the *growth rate*. \n\n *High quality pdf files can be obtained by clicking on any graph. This page is generated automatically through a [python script available on Github](https://github.com/brunoscherrer/conarvirus).* \n\n")
+    
+    f.write("## Table of contents\n-  [World (by continents)](#World) <br>\n-  Continents (by countries) :\n	- [Europe](#Europe) <br>\n	- [Asia](#Asia) <br>\n	- [North America](#North_America) ([United States](#United_States) by states) <br>\n	- [South America](#South_America) <br>\n	- [Africa](#Africa) <br>\n	- [Oceania](#Oceania) <br>\n    - [15 countries with the most deaths (in absolute value)](#top15) <br>\n\n")
+    
+    for (r,_),n in reg:
+
+        r2 = r.replace(' ','_')
+        
+        f.write("\n- - - \n\n")
+
+        if r!='United States':
+            f.write("## "+n+"<a name=\""+r2+"\"> ([table of contents](#top))\n\n" )
+        else:
+            f.write("### "+n+"<a name=\""+r2+"\"> ([table of contents](#top))\n\n" )
+
+        
+        for var,n2 in [ ['d','Deaths'], ['c', 'Confirmed cases'], ['r', 'Recovered cases'] ]:
+            if (r,var)!=('United States','r'):
+                f.write("- "+n2+": [absolute values](#"+r2+var+"_abs), [normalized by population size](#"+r2+var+"_rel) <br>\n")
+        f.write("\n")
+            
+        for var,n2 in [ ['d','Deaths'], ['c', 'Confirmed cases'], ['r', 'Recovered cases'] ]:
+
+            if (r,var)!=('United States','r'):
+            
+                what_to_plot=[ (2,3), var, ff ]
+
+                fi = "./fig/"+get_filename (r, False, what_to_plot)+"_a"
+                f.write("### "+n2+" (absolute values) <a name=\""+r2+var+"_abs\"> ([table of contents](#top))\n\n")
+                f.write("[![]("+fi+".png"+")]("+fi+".pdf"+")\n\n")
+                fi = "./fig/"+r2+"_legend"
+                f.write("[![]("+fi+".png"+")]("+fi+".pdf"+")\n\n")
+                fi = "./fig/"+get_filename (r2, True, what_to_plot)+"_a"
+                #f.write("["+n2+", curves synchronized (starting when deaths>="+str(death_threshold)+")]("+fi+".pdf) ([table of contents](#top))\n\n")
+
+                what_to_plot=[ (2,3), var, ffb ]
+
+                fi = "./fig/"+get_filename (r2, False, what_to_plot)+"_b"
+                f.write("### "+n2+" (normalized by population size) <a name=\""+r2+var+"_rel\"> ([table of contents](#top))\n\n")
+                f.write("[![]("+fi+".png"+")]("+fi+".pdf"+")\n\n")
+                fi = "./fig/"+r2+"_legend"
+                f.write("[![]("+fi+".png"+")]("+fi+".pdf"+")\n\n")
+                fi = "./fig/"+get_filename (r2, True, what_to_plot)+"_b"
+                #f.write("["+n2+", curves synchronized (starting when deaths>="+str(death_threshold)+")]("+fi+".pdf) ([table of contents](#top))\n\n")
+            
+
+    f.close()
+
+    os.system("markdown README2.md > README2.html")
+    
+    print("Generation of README2.md and README2.html done")
+
+    
+def generate_anim():
+    
+    for var in [ ['deaths'] ]:#, ['confirmed'], ['recovered'] ]:
+        what_to_plot=[ (2,3), var, ff ]
+        for (r, begin),_ in [ (('World',''), 'World' ), (('Europe','2/25/20'), 'Europe'), ( ('Asia',''), 'Asia'),( ('North America','3/4/20'), 'North America'),     ( ('South America','3/18/20'), 'South America') ]:
+            for sync in [False]:#, True]:
+                animation(r, what_to_plot=what_to_plot, begin=begin, sm=sm, sync=sync)
+
+
+
+                
+
+

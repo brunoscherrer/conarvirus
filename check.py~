@@ -1,0 +1,20 @@
+#!/usr/bin/python3
+
+
+from covid import *
+
+
+global death_threshold = 10
+
+
+reg = [   ( ('World',''), 'World' ),
+          ( ('Europe','2/25/20'), 'Europe'),
+          ( ('Asia',''), 'Asia'),
+          ( ('North America','3/4/20'), 'North America'),
+          ( ('South America','3/18/20'), 'South America'),
+          ( ('Africa','3/9/20'), 'Africa' ),
+          ( ('Oceania','4/1/20'), 'Oceania' )  ,
+          ( ('top10',''), '10 most affected countries' )    ]
+
+
+check_for_countries()
