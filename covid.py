@@ -705,7 +705,7 @@ ff2b = [4, 8, 6, 5, 9, 7]#[4, 5, 8, 9, 6, 7]
     
 def generate_graphs():
     for (r, begin),_ in reg:
-        for var in  [ ['deaths'], ['confirmed'], ['recovered'] ]:
+        for var in  [ ['deaths'], ['confirmed'] ]:#, ['recovered'] ]:
             if (r,var)!=('United States','recovered'):
                 for sync in [False]:
                     what_to_plot=[ (2,3), var, ff ]
@@ -734,12 +734,12 @@ def generate_markdown():
             f.write("### "+n+"<a name=\""+r2+"\"> ([table of contents](#top))\n\n" )
 
         
-        for var,n2 in [ ['d','Deaths'], ['c', 'Confirmed cases'], ['r', 'Recovered cases'] ]:
+        for var,n2 in [ ['d','Deaths'], ['c', 'Confirmed cases']]:#, ['r', 'Recovered cases'] ]:
             if (r,var)!=('United States','r'):
                 f.write("- "+n2+": [absolute values](#"+r2+var+"_abs), [normalized by population size](#"+r2+var+"_rel) <br>\n")
         f.write("\n")
             
-        for var,n2 in [ ['d','Deaths'], ['c', 'Confirmed cases'], ['r', 'Recovered cases'] ]:
+        for var,n2 in [ ['d','Deaths'], ['c', 'Confirmed cases']]:#, ['r', 'Recovered cases'] ]:
 
             if (r,var)!=('United States','r'):
             

@@ -28,7 +28,6 @@
 
 - Deaths: [absolute values](#Worldd_abs), [normalized by population size](#Worldd_rel) <br>
 - Confirmed cases: [absolute values](#Worldc_abs), [normalized by population size](#Worldc_rel) <br>
-- Recovered cases: [absolute values](#Worldr_abs), [normalized by population size](#Worldr_rel) <br>
 
 ### Deaths (absolute values) <a name="Worldd_abs"> ([table of contents](#top))
 
@@ -54,18 +53,6 @@
 
 [![](./fig/World_legend.png)](./fig/World_legend.pdf)
 
-### Recovered cases (absolute values) <a name="Worldr_abs"> ([table of contents](#top))
-
-[![](./fig/World_r_a.png)](./fig/World_r_a.pdf)
-
-[![](./fig/World_legend.png)](./fig/World_legend.pdf)
-
-### Recovered cases (normalized by population size) <a name="Worldr_rel"> ([table of contents](#top))
-
-[![](./fig/World_r_b.png)](./fig/World_r_b.pdf)
-
-[![](./fig/World_legend.png)](./fig/World_legend.pdf)
-
 
 - - - 
 
@@ -73,7 +60,6 @@
 
 - Deaths: [absolute values](#Europed_abs), [normalized by population size](#Europed_rel) <br>
 - Confirmed cases: [absolute values](#Europec_abs), [normalized by population size](#Europec_rel) <br>
-- Recovered cases: [absolute values](#Europer_abs), [normalized by population size](#Europer_rel) <br>
 
 ### Deaths (absolute values) <a name="Europed_abs"> ([table of contents](#top))
 
@@ -99,18 +85,6 @@
 
 [![](./fig/Europe_legend.png)](./fig/Europe_legend.pdf)
 
-### Recovered cases (absolute values) <a name="Europer_abs"> ([table of contents](#top))
-
-[![](./fig/Europe_r_a.png)](./fig/Europe_r_a.pdf)
-
-[![](./fig/Europe_legend.png)](./fig/Europe_legend.pdf)
-
-### Recovered cases (normalized by population size) <a name="Europer_rel"> ([table of contents](#top))
-
-[![](./fig/Europe_r_b.png)](./fig/Europe_r_b.pdf)
-
-[![](./fig/Europe_legend.png)](./fig/Europe_legend.pdf)
-
 
 - - - 
 
@@ -118,7 +92,6 @@
 
 - Deaths: [absolute values](#Asiad_abs), [normalized by population size](#Asiad_rel) <br>
 - Confirmed cases: [absolute values](#Asiac_abs), [normalized by population size](#Asiac_rel) <br>
-- Recovered cases: [absolute values](#Asiar_abs), [normalized by population size](#Asiar_rel) <br>
 
 ### Deaths (absolute values) <a name="Asiad_abs"> ([table of contents](#top))
 
@@ -144,18 +117,6 @@
 
 [![](./fig/Asia_legend.png)](./fig/Asia_legend.pdf)
 
-### Recovered cases (absolute values) <a name="Asiar_abs"> ([table of contents](#top))
-
-[![](./fig/Asia_r_a.png)](./fig/Asia_r_a.pdf)
-
-[![](./fig/Asia_legend.png)](./fig/Asia_legend.pdf)
-
-### Recovered cases (normalized by population size) <a name="Asiar_rel"> ([table of contents](#top))
-
-[![](./fig/Asia_r_b.png)](./fig/Asia_r_b.pdf)
-
-[![](./fig/Asia_legend.png)](./fig/Asia_legend.pdf)
-
 
 - - - 
 
@@ -163,7 +124,6 @@
 
 - Deaths: [absolute values](#North_Americad_abs), [normalized by population size](#North_Americad_rel) <br>
 - Confirmed cases: [absolute values](#North_Americac_abs), [normalized by population size](#North_Americac_rel) <br>
-- Recovered cases: [absolute values](#North_Americar_abs), [normalized by population size](#North_Americar_rel) <br>
 
 ### Deaths (absolute values) <a name="North_Americad_abs"> ([table of contents](#top))
 
@@ -186,18 +146,6 @@
 ### Confirmed cases (normalized by population size) <a name="North_Americac_rel"> ([table of contents](#top))
 
 [![](./fig/North_America_c_b.png)](./fig/North_America_c_b.pdf)
-
-[![](./fig/North_America_legend.png)](./fig/North_America_legend.pdf)
-
-### Recovered cases (absolute values) <a name="North_Americar_abs"> ([table of contents](#top))
-
-[![](./fig/North_America_r_a.png)](./fig/North_America_r_a.pdf)
-
-[![](./fig/North_America_legend.png)](./fig/North_America_legend.pdf)
-
-### Recovered cases (normalized by population size) <a name="North_Americar_rel"> ([table of contents](#top))
-
-[![](./fig/North_America_r_b.png)](./fig/North_America_r_b.pdf)
 
 [![](./fig/North_America_legend.png)](./fig/North_America_legend.pdf)
 
@@ -240,7 +188,6 @@
 
 - Deaths: [absolute values](#South_Americad_abs), [normalized by population size](#South_Americad_rel) <br>
 - Confirmed cases: [absolute values](#South_Americac_abs), [normalized by population size](#South_Americac_rel) <br>
-- Recovered cases: [absolute values](#South_Americar_abs), [normalized by population size](#South_Americar_rel) <br>
 
 ### Deaths (absolute values) <a name="South_Americad_abs"> ([table of contents](#top))
 
@@ -266,18 +213,6 @@
 
 [![](./fig/South_America_legend.png)](./fig/South_America_legend.pdf)
 
-### Recovered cases (absolute values) <a name="South_Americar_abs"> ([table of contents](#top))
-
-[![](./fig/South_America_r_a.png)](./fig/South_America_r_a.pdf)
-
-[![](./fig/South_America_legend.png)](./fig/South_America_legend.pdf)
-
-### Recovered cases (normalized by population size) <a name="South_Americar_rel"> ([table of contents](#top))
-
-[![](./fig/South_America_r_b.png)](./fig/South_America_r_b.pdf)
-
-[![](./fig/South_America_legend.png)](./fig/South_America_legend.pdf)
-
 
 - - - 
 
@@ -285,7 +220,6 @@
 
 - Deaths: [absolute values](#Africad_abs), [normalized by population size](#Africad_rel) <br>
 - Confirmed cases: [absolute values](#Africac_abs), [normalized by population size](#Africac_rel) <br>
-- Recovered cases: [absolute values](#Africar_abs), [normalized by population size](#Africar_rel) <br>
 
 ### Deaths (absolute values) <a name="Africad_abs"> ([table of contents](#top))
 
@@ -311,18 +245,6 @@
 
 [![](./fig/Africa_legend.png)](./fig/Africa_legend.pdf)
 
-### Recovered cases (absolute values) <a name="Africar_abs"> ([table of contents](#top))
-
-[![](./fig/Africa_r_a.png)](./fig/Africa_r_a.pdf)
-
-[![](./fig/Africa_legend.png)](./fig/Africa_legend.pdf)
-
-### Recovered cases (normalized by population size) <a name="Africar_rel"> ([table of contents](#top))
-
-[![](./fig/Africa_r_b.png)](./fig/Africa_r_b.pdf)
-
-[![](./fig/Africa_legend.png)](./fig/Africa_legend.pdf)
-
 
 - - - 
 
@@ -330,7 +252,6 @@
 
 - Deaths: [absolute values](#Oceaniad_abs), [normalized by population size](#Oceaniad_rel) <br>
 - Confirmed cases: [absolute values](#Oceaniac_abs), [normalized by population size](#Oceaniac_rel) <br>
-- Recovered cases: [absolute values](#Oceaniar_abs), [normalized by population size](#Oceaniar_rel) <br>
 
 ### Deaths (absolute values) <a name="Oceaniad_abs"> ([table of contents](#top))
 
@@ -356,18 +277,6 @@
 
 [![](./fig/Oceania_legend.png)](./fig/Oceania_legend.pdf)
 
-### Recovered cases (absolute values) <a name="Oceaniar_abs"> ([table of contents](#top))
-
-[![](./fig/Oceania_r_a.png)](./fig/Oceania_r_a.pdf)
-
-[![](./fig/Oceania_legend.png)](./fig/Oceania_legend.pdf)
-
-### Recovered cases (normalized by population size) <a name="Oceaniar_rel"> ([table of contents](#top))
-
-[![](./fig/Oceania_r_b.png)](./fig/Oceania_r_b.pdf)
-
-[![](./fig/Oceania_legend.png)](./fig/Oceania_legend.pdf)
-
 
 - - - 
 
@@ -375,7 +284,6 @@
 
 - Deaths: [absolute values](#top15d_abs), [normalized by population size](#top15d_rel) <br>
 - Confirmed cases: [absolute values](#top15c_abs), [normalized by population size](#top15c_rel) <br>
-- Recovered cases: [absolute values](#top15r_abs), [normalized by population size](#top15r_rel) <br>
 
 ### Deaths (absolute values) <a name="top15d_abs"> ([table of contents](#top))
 
@@ -398,18 +306,6 @@
 ### Confirmed cases (normalized by population size) <a name="top15c_rel"> ([table of contents](#top))
 
 [![](./fig/top15_c_b.png)](./fig/top15_c_b.pdf)
-
-[![](./fig/top15_legend.png)](./fig/top15_legend.pdf)
-
-### Recovered cases (absolute values) <a name="top15r_abs"> ([table of contents](#top))
-
-[![](./fig/top15_r_a.png)](./fig/top15_r_a.pdf)
-
-[![](./fig/top15_legend.png)](./fig/top15_legend.pdf)
-
-### Recovered cases (normalized by population size) <a name="top15r_rel"> ([table of contents](#top))
-
-[![](./fig/top15_r_b.png)](./fig/top15_r_b.pdf)
 
 [![](./fig/top15_legend.png)](./fig/top15_legend.pdf)
 
