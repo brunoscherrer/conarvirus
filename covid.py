@@ -23,15 +23,17 @@ dpi = 70
 
 # regions to plot
 
-reg = [   ( ('World',''), 'World' ),
-          ( ('Europe','2/25/20'), 'Europe'),
-          ( ('Asia',''), 'Asia'),
-          ( ('North America','3/4/20'), 'North America'),
-          ( ('United States','3/4/20'), 'United States'),
-          ( ('South America','3/18/20'), 'South America'),
-          ( ('Africa','3/9/20'), 'Africa' ),
-          ( ('Oceania','4/1/20'), 'Oceania' )  ,
-          ( ('top15',''), '15 countries with the most deaths' )    ]
+datedeb = '11/1/20'
+
+reg = [   ( ('World',datedeb), 'World' ),
+          ( ('Europe',datedeb), 'Europe'),
+          ( ('Asia',datedeb), 'Asia'),
+          ( ('North America',datedeb), 'North America'),
+          ( ('United States',datedeb), 'United States'),
+          ( ('South America',datedeb), 'South America'),
+          ( ('Africa',datedeb), 'Africa' ),
+          ( ('Oceania',datedeb), 'Oceania' )  ,
+          ( ('top15',datedeb), '15 countries with the most deaths' )    ]
 
 #reg = [    ( ('top15',''), '15 countries with the most deaths' )    ]
 
